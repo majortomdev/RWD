@@ -16,26 +16,35 @@ export class SignInComponent {
   errorMsg: any;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private aformBuilder: FormBuilder,
     private router: Router,
     private authSvc: AuthService
     ) {
-      this.loginForm=this.formBuilder.group(
-        username: ['', [Validators.required, Validators.minLength(5), Validators.email]],
-        password: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]]
+      this.loginForm = this.aformBuilder.group(
+       {
+        //  username: ['', [Validators.required, Validators.minLength(5), Validators.email]],
+        //  password: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]]
+
+        username: [''],
+        password: ['']
+      }
       );
    }
 
 
-   onLogin(){
+   onLogin() {
      this.authSvc.login(this.loginForm.controls['username'].value, this.loginForm.controls['password'].value)
      .subscribe(
        (user: User) => {
-         if(user) {
+         if (user) {
            this.authSvc.errorMsg = null;
+           this.router.navigate(['add-user']);
+         } else {
+           this.authSvc.errorMsg = 'username and/or password do not match jimmy';
+           this.router.navigate(['sign-in']);
          }
        }
-     )
+     );
    }
 
 }

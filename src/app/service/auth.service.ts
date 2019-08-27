@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { tap, catchError } from 'rxjs/operators';
+import { User } from '../model/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -32,15 +33,17 @@ export class AuthService {
     .pipe(
       tap (
         (user: User) => {
-          if(user){
+          if (user) {
             localStorage.setItem('accessToken', user.token);
-            console.log('Logged in for username='${username}' with password '${password}+ ' successfully');
+            console.log(`Logged in username=${username} with password${password} successfully`);
+          // console.log('YiPPPeeeYYaaaYYYYYYYYYKIAAAYyyyyy');
           } else {
-            console.log('Login Failed for username='${username}' with password '${password});
+
+            console.log(`Login failed for username=${username} with password${password}`);
           }
         }
       )
-    )
+    );
   }
 
   public logout() {
