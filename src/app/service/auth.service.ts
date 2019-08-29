@@ -46,7 +46,7 @@ export class AuthService {
     );
   }
 
-  public logout() {
+   logout() {
     localStorage.removeItem('accessToken');
     this.router.navigate(['sign-in']);
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
@@ -22,11 +22,11 @@ export class SignInComponent {
     ) {
       this.loginForm = this.aformBuilder.group(
        {
-        //  username: ['', [Validators.required, Validators.minLength(5), Validators.email]],
-        //  password: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]]
+         username: ['', [Validators.required, Validators.minLength(5), Validators.email]],
+         password: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]]
 
-        username: [''],
-        password: ['']
+        // username: [''],
+        // password: ['']
       }
       );
    }
@@ -34,13 +34,14 @@ export class SignInComponent {
 
    onLogin() {
      this.authSvc.login(this.loginForm.controls['username'].value, this.loginForm.controls['password'].value)
-     .subscribe(
+      .subscribe(
        (user: User) => {
          if (user) {
            this.authSvc.errorMsg = null;
-           this.router.navigate(['add-user']);
+           this.router.navigate(['list-user']);
          } else {
-           this.authSvc.errorMsg = 'username and/or password do not match jimmy';
+          this.authSvc.errorMsg = null;
+          this.errorMsg = 'username and/or password do not match jimmy';
            this.router.navigate(['sign-in']);
          }
        }

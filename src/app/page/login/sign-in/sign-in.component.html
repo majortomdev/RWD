@@ -1,3 +1,56 @@
-<p>
-  sign-in works!
-</p>
+<!-- <p>sign-in works!</p> -->
+<mat-card>
+  <mat-card-title align="center">
+    <mat-card *ngIf='authSvc.errorMsg || errorMsg'>
+    <mat-card-subtitle *ngIf='authSvc.errorMsg' align='center'>
+      <div [ngClass] = "{ 'error' : authSvc.errorMsg }">{{authSvc.errorMsg}}</div>
+    </mat-card-subtitle>
+    <mat-card-subtitle *ngIf='authSvc.errorMsg' align='center'>
+      <div [ngClass] = "{ 'error' : authSvc.errorMsg }">{{authSvc.errorMsg}}</div>
+    </mat-card-subtitle>
+  </mat-card>
+  <div class="title-header">Login Form</div>
+  <!-- <div class="asYetUnkown">Another aul div....aahem...-  Form</div> -->
+  <mat-divider></mat-divider>
+  <div class="hint-msg">Hint: uername@gmail.com, password</div>
+</mat-card-title>
+
+  <!-- <div> -->
+    <mat-card-content>
+      <form [formGroup] = 'loginForm'>
+    <mat-card>
+      <mat-card-content>
+        <mat-grid-list cols='1' rowHeight='115px'>
+          <mat-grid-tile>
+            <div class="controls-container">
+                <mat-form-field>
+                  <mat-icon matPrefix>account_circle</mat-icon>
+                  <input matInput type='text' formControlName="username" placeholder="username (EMail)" required>
+                  <mat-error *ngIf="loginForm.controls['username'].errors?.required">Username is required</mat-error>
+                  <mat-error *ngIf="loginForm.controls['username'].errors?.minlength">Username must be at least 5 characters long</mat-error>
+                  <mat-error *ngIf="loginForm.controls['username'].errors?.email">username must be valid e-mail</mat-error>
+                </mat-form-field>
+<!-- my new form-field for new input:  -->
+                <mat-form-field>
+                    <mat-icon matPrefix>https</mat-icon>
+                    <input matInput type='password' formControlName="password" placeholder="password" required>
+                    <mat-error *ngIf="loginForm.controls['username'].errors?.required">Password is required</mat-error>
+                    <mat-error *ngIf="loginForm.controls['username'].errors?.minlength">Password must be at least 5 characters long</mat-error>
+                    <mat-error *ngIf="loginForm.controls['username'].errors?.maxlength">Password must not be more than 28 chars</mat-error>
+                  </mat-form-field>
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </mat-card-content>
+    </mat-card>
+    </form>
+  <!-- </div> -->
+  </mat-card-content>
+
+  <mat-divider></mat-divider>
+
+  <mat-card-footer align='right'>
+    <a mat-raised-button routerLink='/sign-up' color='warm'>Sign-up</a>
+    <button mat-raised-button color='primary'[disabled]='loginForm.invalid' (click)='onLogin()'>Login</button>
+  </mat-card-footer>
+</mat-card>

@@ -16,6 +16,7 @@ import { ListUserComponent } from './page/user/list-user/list-user.component';
 import { AuthService } from './service/auth.service';
 import { SignUpComponent } from './page/login/sign-up/sign-up.component';
 import { HttpClientModule } from '@angular/common/http';
+import {MatCardModule} from '@angular/material/card';
 // import { HttpModule } from '@angular/common/http';
 
 
@@ -37,15 +38,16 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     AppMaterialModule,
     ReactiveFormsModule,
-    HttpClientModule
-    // HttpModule
+    HttpClientModule,
+    MatCardModule
+
   ],
   exports: [
-   // HttpModule
+
   ],
-  providers: [
-    AuthService
-    ],
+  // providers: [
+  //   AuthService
+  //   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
