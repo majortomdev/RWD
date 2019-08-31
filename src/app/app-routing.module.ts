@@ -15,7 +15,7 @@ const routes: Routes = [
 
   {path: 'list-user', component: ListUserComponent, canActivate: [AuthGuard]}, // canActivate auth cheks by
   {path: 'add-user', component: AddUserComponent, canActivate: [AuthGuard]}, // localStorage toekn check
-  {path: 'edit-user', component: EditUserComponent, canActivate: [AuthGuard]}
+  {path: 'edit-user/:id', component: EditUserComponent, canActivate: [AuthGuard]}
 
 ];
 

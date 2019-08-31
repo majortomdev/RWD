@@ -10,11 +10,20 @@ import { User } from '../model/user.model';
 export class AuthService {
   private authUrl: 'http://localhost:8080/api/login'; // 'api/login;
   errorMsg: any;
+  private _loggedInUser?: User;
 
   constructor(
     private http: HttpClient,
     private router: Router
   ) { }
+
+  get loggedInUser(): User {
+    return this.loggedInUser;
+  }
+
+  set loggedInUser(user: User) {
+    this.loggedInUser = user;
+  }
 
   getHeaders(): {headers: HttpHeaders} {
     const httpOptions = {
